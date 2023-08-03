@@ -1,13 +1,39 @@
-[gd_scene load_steps=4 format=3 uid="uid://chx6gbhsjiio8"]
+[gd_scene load_steps=10 format=3 uid="uid://chx6gbhsjiio8"]
 
 [ext_resource type="Texture2D" uid="uid://cfy5p27gj6ehb" path="res://Textures/dark/texture_08.png" id="1_548q6"]
+[ext_resource type="Script" path="res://World/world.gd" id="1_n7txt"]
+[ext_resource type="PackedScene" uid="uid://jmud0ldapaio" path="res://Player/player.tscn" id="2_o5sb2"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qoouk"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_nrpfy"]
+sky_material = SubResource("ProceduralSkyMaterial_qoouk")
+
+[sub_resource type="Environment" id="Environment_70xko"]
+background_mode = 2
+sky = SubResource("Sky_nrpfy")
+tonemap_mode = 2
+glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6tu8v"]
 albedo_texture = ExtResource("1_548q6")
+uv1_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_d4rjm"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_a4xhf"]
+
 [node name="World" type="Node"]
+script = ExtResource("1_n7txt")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_70xko")
 
 [node name="Sandbox" type="Node3D" parent="."]
 
@@ -16,17 +42,39 @@ transform = Transform3D(20, 0, 0, 0, 0.209, 0, 0, 0, 20, -10.0223, 0.412156, -10
 material_override = SubResource("StandardMaterial3D_6tu8v")
 mesh = SubResource("BoxMesh_d4rjm")
 
+[node name="StaticBody3D" type="StaticBody3D" parent="Sandbox/Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sandbox/Floor/StaticBody3D"]
+shape = SubResource("BoxShape3D_a4xhf")
+
 [node name="Floor2" type="MeshInstance3D" parent="Sandbox"]
-transform = Transform3D(20, 0, 0, 0, 0.209, 0, 0, 0, 20, 9.97768, 0.412, -10.1271)
+transform = Transform3D(19.9806, 0, 0, 0, 0.208797, 0, 0, 0, 19.9806, 9.97768, 0.412, -10.1271)
 material_override = SubResource("StandardMaterial3D_6tu8v")
 mesh = SubResource("BoxMesh_d4rjm")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Sandbox/Floor2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sandbox/Floor2/StaticBody3D"]
+shape = SubResource("BoxShape3D_a4xhf")
 
 [node name="Floor3" type="MeshInstance3D" parent="Sandbox"]
 transform = Transform3D(20, 0, 0, 0, 0.209, 0, 0, 0, 20, 9.97768, 0.412, 9.87288)
 material_override = SubResource("StandardMaterial3D_6tu8v")
 mesh = SubResource("BoxMesh_d4rjm")
 
+[node name="StaticBody3D" type="StaticBody3D" parent="Sandbox/Floor3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sandbox/Floor3/StaticBody3D"]
+shape = SubResource("BoxShape3D_a4xhf")
+
 [node name="Floor4" type="MeshInstance3D" parent="Sandbox"]
 transform = Transform3D(20, 0, 0, 0, 0.209, 0, 0, 0, 20, -10.0223, 0.412, 9.87288)
 material_override = SubResource("StandardMaterial3D_6tu8v")
 mesh = SubResource("BoxMesh_d4rjm")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Sandbox/Floor4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sandbox/Floor4/StaticBody3D"]
+shape = SubResource("BoxShape3D_a4xhf")
+
+[node name="Player" parent="." instance=ExtResource("2_o5sb2")]

@@ -1,3 +1,32 @@
-[gd_scene format=3 uid="uid://chx6gbhsjiio8"]
+[gd_scene load_steps=4 format=3 uid="uid://chx6gbhsjiio8"]
+
+[ext_resource type="Texture2D" uid="uid://cfy5p27gj6ehb" path="res://Textures/dark/texture_08.png" id="1_548q6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6tu8v"]
+albedo_texture = ExtResource("1_548q6")
+
+[sub_resource type="BoxMesh" id="BoxMesh_d4rjm"]
 
 [node name="World" type="Node"]
+
+[node name="Sandbox" type="Node3D" parent="."]
+
+[node name="Floor" type="MeshInstance3D" parent="Sandbox"]
+transform = Transform3D(20, 0, 0, 0, 0.209, 0, 0, 0, 20, -10.0223, 0.412156, -10.1271)
+material_override = SubResource("StandardMaterial3D_6tu8v")
+mesh = SubResource("BoxMesh_d4rjm")
+
+[node name="Floor2" type="MeshInstance3D" parent="Sandbox"]
+transform = Transform3D(20, 0, 0, 0, 0.209, 0, 0, 0, 20, 9.97768, 0.412, -10.1271)
+material_override = SubResource("StandardMaterial3D_6tu8v")
+mesh = SubResource("BoxMesh_d4rjm")
+
+[node name="Floor3" type="MeshInstance3D" parent="Sandbox"]
+transform = Transform3D(20, 0, 0, 0, 0.209, 0, 0, 0, 20, 9.97768, 0.412, 9.87288)
+material_override = SubResource("StandardMaterial3D_6tu8v")
+mesh = SubResource("BoxMesh_d4rjm")
+
+[node name="Floor4" type="MeshInstance3D" parent="Sandbox"]
+transform = Transform3D(20, 0, 0, 0, 0.209, 0, 0, 0, 20, -10.0223, 0.412, 9.87288)
+material_override = SubResource("StandardMaterial3D_6tu8v")
+mesh = SubResource("BoxMesh_d4rjm")
